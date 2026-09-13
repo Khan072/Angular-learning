@@ -1,0 +1,16 @@
+.product-card {
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin: 20px;
+}
+
+.product-card h2 {
+  margin-bottom: 10px;
+}
+
+.product-card button {
+  padding: 10px 20px;
+  cursor: pointer;
+}
