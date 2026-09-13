@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 import { Counter } from './components/counter/counter';
 import { ProductCard } from './components/product-card/product-card';
+import { ProductService } from './services/product.service';
 
 @Component({
   selector: 'app-root',
@@ -11,31 +12,18 @@ import { ProductCard } from './components/product-card/product-card';
 })
 export class App {
 
-products = [
-  {
-    id: 1,
-    name: 'iPhone 15',
-    price: 59999
-  },
-  {
-    id: 2,
-    name: 'MacBook Air',
-    price: 89999
-  },
-  {
-    id: 3,
-    name: 'AirPods Pro',
-    price: 24999
-  }
-];
+  private productService = inject(ProductService);
+
+  products = this.productService.getProducts();
 
   selectedProduct = '';
 
- handleBuy(productId: number) {
-  const product = this.products.find(p => p.id === productId);
+  handleBuy(productId: number) {
+    const product = this.products.find(p => p.id === productId);
 
-  if (product) {
-    this.selectedProduct = product.name;
+    if (product) {
+      this.selectedProduct = product.name;
+    }
   }
-}
+
 }
