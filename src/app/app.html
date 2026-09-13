@@ -4,10 +4,14 @@
 
 <h1>ShopFlow Products</h1>
 
-<app-product-card
-  [product]="product"
-  (buy)="handleBuy($event)"
-></app-product-card>
+@for (product of products; track product.id) {
+
+  <app-product-card
+    [product]="product"
+    (buy)="handleBuy($event)"
+  ></app-product-card>
+
+}
 
 @if (selectedProduct) {
   <h2>Selected Product: {{ selectedProduct }}</h2>

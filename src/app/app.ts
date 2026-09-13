@@ -11,17 +11,31 @@ import { ProductCard } from './components/product-card/product-card';
 })
 export class App {
 
-  product = {
+products = [
+  {
     id: 1,
     name: 'iPhone 15',
     price: 59999
-  };
+  },
+  {
+    id: 2,
+    name: 'MacBook Air',
+    price: 89999
+  },
+  {
+    id: 3,
+    name: 'AirPods Pro',
+    price: 24999
+  }
+];
 
   selectedProduct = '';
 
-  handleBuy(productId: number) {
-    if (productId === this.product.id) {
-      this.selectedProduct = this.product.name;
-    }
+ handleBuy(productId: number) {
+  const product = this.products.find(p => p.id === productId);
+
+  if (product) {
+    this.selectedProduct = product.name;
   }
+}
 }
