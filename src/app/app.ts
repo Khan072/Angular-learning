@@ -1,8 +1,9 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 
 import { Counter } from './components/counter/counter';
 import { ProductCard } from './components/product-card/product-card';
 import { ProductService } from './services/product.service';
+import { Product } from './models/product';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,21 @@ export class App {
 
   private productService = inject(ProductService);
 
-  products = this.productService.getProducts();
+  products = signal<Product[]>([]);
 
   selectedProduct = '';
 
-  handleBuy(productId: number) {
-    const product = this.products.find(p => p.id === productId);
-
-    if (product) {
-      this.selectedProduct = product.name;
-    }
+  constructor() {
+    this.productService.getProducts().subscribe(data => {
+      this.products.set(data);
+    });
   }
 
+  handleBuy(productId: number) {
+    const product = this.products().find(p => p.id === productId);
+
+    if (product) {
+      this.selectedProduct = product.title;
+    }
+  }
 }

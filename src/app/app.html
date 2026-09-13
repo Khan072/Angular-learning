@@ -1,17 +1,15 @@
-<app-counter></app-counter>
-
-<hr>
-
 <h1>ShopFlow Products</h1>
 
-@for (product of products; track product.id) {
+<div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 
-  <app-product-card
-    [product]="product"
-    (buy)="handleBuy($event)"
-  ></app-product-card>
+  @for (product of products(); track product.id) {
+    <app-product-card
+      [product]="product"
+      (buy)="handleBuy($event)"
+    ></app-product-card>
+  }
 
-}
+</div>
 
 @if (selectedProduct) {
   <h2>Selected Product: {{ selectedProduct }}</h2>
